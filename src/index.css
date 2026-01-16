@@ -123,18 +123,18 @@ button:active:not(:disabled) {
   }
 }
 
-/* 601px〜1119px: 1カラム縦並び、左カラム固定幅維持 */
+/* 601px〜1119px: 1カラム縦並び、全幅使用 */
 @media (min-width: 601px) and (max-width: 1119px) {
   .main-content {
     flex-direction: column !important;
-    align-items: flex-start !important;
+    align-items: stretch !important;
   }
   .main-content > div:first-child {
-    width: 660px !important;
-    min-width: 660px !important;
+    width: 100% !important;
+    min-width: auto !important;
   }
   .right-column {
-    width: 660px !important;
+    width: 100% !important;
   }
   .yaku-grid {
     grid-template-columns: repeat(3, 1fr) !important;

@@ -32,15 +32,18 @@ function useDynamicTileSize(params: TileSizeParams): { width: number; height: nu
       const viewportWidth = window.innerWidth;
 
       // レイアウトに応じた利用可能幅
-      // - 1120px以上: 2カラム（左660px固定）
-      // - 601-1119px: 1カラム（左660px固定）
-      // - 600px以下: モバイル（全幅）
+      // - 1120px以上: 2カラム（左660px固定）→ 640px使える
+      // - 601-1119px: 1カラム（全幅）→ viewportWidth - padding
+      // - 600px以下: モバイル（全幅）→ viewportWidth - 16px
       let availableContainerWidth: number;
       if (viewportWidth <= 600) {
         // モバイル: 全幅からpadding引く
         availableContainerWidth = viewportWidth - 16;
+      } else if (viewportWidth < 1120) {
+        // 1カラム表示: 全幅からpadding引く
+        availableContainerWidth = viewportWidth - 40; // 左右padding 20px
       } else {
-        // PC/タブレット: 左カラム固定660pxなので、手牌エリアは約640px使える
+        // 2カラム表示: 左カラム固定660pxなので約640px使える
         availableContainerWidth = 640;
       }
 
