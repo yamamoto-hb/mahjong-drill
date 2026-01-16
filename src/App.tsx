@@ -1,4 +1,4 @@
-import { useState, useCallback, CSSProperties } from 'react';
+import { useState, useCallback, useEffect, CSSProperties } from 'react';
 import {
   FuBreakdown,
   ScoreResult,
@@ -79,6 +79,15 @@ function App() {
   // ステップ状態
   const [currentStep, setCurrentStep] = useState<LearningStep>('yaku');
   const [stepStates, setStepStates] = useState<StepAnswerState>(createInitialStepState);
+
+  // デバッグ用: ビューポート幅を表示
+  const [viewportWidth, setViewportWidth] = useState(0);
+  useEffect(() => {
+    const updateWidth = () => setViewportWidth(window.innerWidth);
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
 
   // 新しい問題を生成
   const generateNewProblem = useCallback(() => {
@@ -292,6 +301,22 @@ function App() {
 
   return (
     <div style={styles.app}>
+      {/* デバッグ用バナー - 後で削除 */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'red',
+        color: 'white',
+        padding: '8px',
+        textAlign: 'center',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        zIndex: 9999,
+      }}>
+        Viewport: {viewportWidth}px | Mode: {viewportWidth <= 1024 ? 'MOBILE' : 'PC'}
+      </div>
       <Header />
 
       <main style={styles.mainContent} className="main-content">
