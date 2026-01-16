@@ -98,8 +98,8 @@ button:active:not(:disabled) {
   opacity: 0.75;
 }
 
-/* PC版で役一覧を3列に（折り返し前） */
-@media (min-width: 941px) {
+/* PC版で役一覧を3列に（折り返し前、1040px以上） */
+@media (min-width: 1041px) {
   .yaku-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
@@ -110,10 +110,11 @@ button:active:not(:disabled) {
   flex-wrap: wrap !important;
 }
 
-/* 左カラム - 問題エリアの幅を確保 */
+/* 左カラム - 問題エリアの幅を固定（縮小させない） */
 .main-content > div:first-child {
-  flex: 0 0 auto !important;
-  min-width: 600px !important;
+  flex: 0 0 660px !important;
+  width: 660px !important;
+  min-width: 660px !important;
 }
 
 /* 右カラム - 縮小可能、最小幅で折り返し */
@@ -129,8 +130,8 @@ button:active:not(:disabled) {
   display: none !important;
 }
 
-/* 折り返し後（940px以下）- 右カラムが下に移動した状態 */
-@media (max-width: 940px) {
+/* 折り返し後（1040px以下）- 右カラムが下に移動した状態 */
+@media (max-width: 1040px) {
   .right-column {
     width: 100% !important;
     min-width: 100% !important;
@@ -147,6 +148,8 @@ button:active:not(:disabled) {
     gap: 8px !important;
   }
   .main-content > div:first-child {
+    flex: 0 0 auto !important;
+    width: 100% !important;
     min-width: 100% !important;
   }
 
