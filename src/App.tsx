@@ -33,22 +33,21 @@ const styles: Record<string, CSSProperties> = {
     flexWrap: 'wrap',
   },
   leftColumn: {
-    flex: '0 0 660px', // 固定幅、縮小不可
+    flex: '0 0 auto', // コンテンツ幅、縮小不可
+    flexShrink: 0,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    width: '660px',
   },
   problemArea: {
     display: 'inline-block',
-    width: '100%',
   },
   rightColumn: {
-    flex: '1 1 480px', // 残りスペースを使う
+    flex: '0 0 480px', // 固定幅480px
     display: 'flex',
     flexDirection: 'column',
     gap: '24px',
-    minWidth: '320px', // これ以下になったら折り返し
+    width: '480px',
     maxWidth: '480px',
     overflow: 'hidden',
   },
