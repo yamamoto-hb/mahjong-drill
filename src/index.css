@@ -98,8 +98,8 @@ button:active:not(:disabled) {
   opacity: 0.75;
 }
 
-/* PC版で役一覧を3列に */
-@media (min-width: 601px) {
+/* PC版で役一覧を3列に（折り返し前） */
+@media (min-width: 941px) {
   .yaku-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
@@ -129,7 +129,17 @@ button:active:not(:disabled) {
   display: none !important;
 }
 
-/* レスポンシブ対応 - 600px以下でモバイルレイアウト適用 */
+/* 折り返し後（940px以下）- 右カラムが下に移動した状態 */
+@media (max-width: 940px) {
+  .right-column {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+}
+
+/* モバイルレイアウト - 600px以下（実際のスマホ幅） */
 @media (max-width: 600px) {
   .main-content {
     flex-direction: column !important;
@@ -138,12 +148,6 @@ button:active:not(:disabled) {
   }
   .main-content > div:first-child {
     min-width: 100% !important;
-  }
-  .right-column {
-    width: 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
-    overflow: visible !important;
   }
 
   /* 手牌コンテナの幅を制限 */
