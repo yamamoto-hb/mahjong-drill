@@ -98,30 +98,16 @@ button:active:not(:disabled) {
   opacity: 0.75;
 }
 
-/* PC版で役一覧を3列に（右カラムが横にある時のみ） */
-@media (min-width: 751px) {
+/* PC版で役一覧を3列に（2カラムレイアウト時） */
+@media (min-width: 1041px) {
   .yaku-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
-/* メインコンテンツ - flexWrapで折り返し可能に */
+/* メインコンテンツ - flexWrapで自然な折り返し */
 .main-content {
   flex-wrap: wrap !important;
-}
-
-/* 左カラム - 縮小不可、コンテンツに合わせた幅 */
-.main-content > div:first-child {
-  flex: 0 0 auto !important;
-  flex-shrink: 0 !important;
-}
-
-/* 右カラム - 固定幅、スペースがなければ折り返し */
-.right-column {
-  flex: 0 0 480px !important;
-  width: 480px !important;
-  max-width: 480px !important;
-  overflow: hidden !important;
 }
 
 /* PC版: 上部のツモ/ロン牌を非表示 */
@@ -129,13 +115,16 @@ button:active:not(:disabled) {
   display: none !important;
 }
 
-/* 折り返し後（750px以下）- 右カラムが下に移動した状態 */
-@media (max-width: 750px) {
-  .right-column {
-    flex: 0 0 100% !important;
-    width: 100% !important;
+/* 1040px以下: 右カラムが下に折り返し、全幅に広がる */
+@media (max-width: 1040px) {
+  .main-content > div:first-child {
+    flex: 1 0 100% !important;
     max-width: 100% !important;
-    overflow: visible !important;
+  }
+  .right-column {
+    flex: 1 0 100% !important;
+    min-width: 100% !important;
+    width: 100% !important;
   }
 }
 

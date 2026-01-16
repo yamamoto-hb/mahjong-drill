@@ -33,23 +33,21 @@ const styles: Record<string, CSSProperties> = {
     flexWrap: 'wrap',
   },
   leftColumn: {
-    flex: '0 0 auto', // コンテンツ幅、縮小不可
-    flexShrink: 0,
+    flex: '1 0 600px', // 最小600px、伸長可能、縮小不可
+    maxWidth: '700px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'stretch',
   },
   problemArea: {
-    display: 'inline-block',
+    width: '100%',
   },
   rightColumn: {
-    flex: '0 0 480px', // 固定幅480px
+    flex: '0 0 400px', // 固定幅400px
     display: 'flex',
     flexDirection: 'column',
     gap: '24px',
-    width: '480px',
-    maxWidth: '480px',
-    overflow: 'hidden',
+    minWidth: '400px',
   },
   footer: {
     padding: '12px 20px',
