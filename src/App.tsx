@@ -33,8 +33,8 @@ const styles: Record<string, CSSProperties> = {
     flexWrap: 'wrap',
   },
   leftColumn: {
-    flex: '1 0 600px', // 最小600px、伸長可能、縮小不可
-    maxWidth: '700px',
+    flex: '0 0 660px', // 固定660px、縮小不可
+    width: '660px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
@@ -43,11 +43,11 @@ const styles: Record<string, CSSProperties> = {
     width: '100%',
   },
   rightColumn: {
-    flex: '0 0 400px', // 固定幅400px
+    flex: '1 1 400px', // 最小400px、伸縮可能
     display: 'flex',
     flexDirection: 'column',
     gap: '24px',
-    minWidth: '400px',
+    minWidth: '300px',
   },
   footer: {
     padding: '12px 20px',
