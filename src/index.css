@@ -105,12 +105,23 @@ button:active:not(:disabled) {
   }
 }
 
-/* 右カラムの幅を固定 */
+/* メインコンテンツ - flexWrapで折り返し可能に */
+.main-content {
+  flex-wrap: wrap !important;
+}
+
+/* 左カラム - 問題エリアの幅を確保 */
+.main-content > div:first-child {
+  flex: 0 0 auto !important;
+  min-width: 600px !important;
+}
+
+/* 右カラム - 縮小可能、最小幅で折り返し */
 .right-column {
-  width: 480px !important;
-  min-width: 480px !important;
+  flex: 1 1 480px !important;
+  min-width: 320px !important;
   max-width: 480px !important;
-  flex-shrink: 0 !important;
+  overflow: hidden !important;
 }
 
 /* PC版: 上部のツモ/ロン牌を非表示 */
@@ -124,6 +135,9 @@ button:active:not(:disabled) {
     flex-direction: column !important;
     padding: 8px !important;
     gap: 8px !important;
+  }
+  .main-content > div:first-child {
+    min-width: 100% !important;
   }
   .right-column {
     width: 100% !important;

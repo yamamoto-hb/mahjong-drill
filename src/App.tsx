@@ -30,23 +30,26 @@ const styles: Record<string, CSSProperties> = {
     padding: '16px 20px',
     maxWidth: '1400px',
     margin: '0 auto',
+    flexWrap: 'wrap',
   },
   leftColumn: {
     flex: '0 0 auto',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
+    minWidth: '600px', // 問題エリアの最小幅を確保
   },
   problemArea: {
     display: 'inline-block',
   },
   rightColumn: {
-    flex: '0 0 480px',
+    flex: '1 1 480px', // 縮小可能に
     display: 'flex',
     flexDirection: 'column',
     gap: '24px',
-    minWidth: '480px',
+    minWidth: '320px', // これ以下になったら折り返し
     maxWidth: '480px',
+    overflow: 'hidden', // はみ出し部分を隠す
   },
   footer: {
     padding: '12px 20px',
