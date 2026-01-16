@@ -132,8 +132,8 @@ button:active:not(:disabled) {
   }
 }
 
-/* モバイル対応 */
-@media (max-width: 480px) {
+/* モバイル対応 - 768px以下でモバイルレイアウト適用 */
+@media (max-width: 768px) {
   .main-content {
     padding: 8px !important;
     gap: 8px !important;
