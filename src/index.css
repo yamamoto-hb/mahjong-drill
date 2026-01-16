@@ -146,30 +146,10 @@ button:active:not(:disabled) {
     padding: 10px !important;
   }
 
-  /* 手牌エリア */
+  /* 手牌エリア - サイズはJSで動的計算 */
   .hand-area-scroll {
     gap: 6px !important;
     flex-wrap: nowrap !important;
-  }
-
-  /* 縦向き牌のサイズ - 大きく */
-  .hand-area-scroll .tile-vertical {
-    width: 28px !important;
-    height: 38px !important;
-  }
-  .hand-area-scroll .tile-vertical img {
-    width: 28px !important;
-    height: 38px !important;
-  }
-
-  /* 横向き牌（チー・ポンで鳴いた牌） */
-  .hand-area-scroll .tile-horizontal {
-    width: 38px !important;
-    height: 28px !important;
-  }
-  .hand-area-scroll .tile-horizontal img {
-    width: 38px !important;
-    height: 28px !important;
   }
 
   /* 牌グループの間隔 */
@@ -183,29 +163,11 @@ button:active:not(:disabled) {
     font-size: 12px !important;
   }
 
-  /* ドラ牌も大きく */
-  .hand-container .dora-tiles .tile-vertical {
-    width: 28px !important;
-    height: 38px !important;
-  }
-  .hand-container .dora-tiles .tile-vertical img {
-    width: 28px !important;
-    height: 38px !important;
-  }
-
   /* モバイル: 上部のツモ/ロン牌を表示 */
   .winning-tile-top {
     display: flex !important;
     align-items: center !important;
     gap: 6px !important;
-  }
-  .winning-tile-top .tile-vertical {
-    width: 28px !important;
-    height: 38px !important;
-  }
-  .winning-tile-top .tile-vertical img {
-    width: 28px !important;
-    height: 38px !important;
   }
 
   /* モバイル: 下部（手牌エリア内）のツモ/ロン牌を非表示 */

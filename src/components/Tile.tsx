@@ -4,6 +4,7 @@ import { Tile as TileType, HonorType } from '../logic/types';
 interface TileProps {
   tile: TileType;
   size?: 'xsmall' | 'small' | 'medium' | 'large';
+  customSize?: { width: number; height: number }; // 動的サイズ指定
   horizontal?: boolean; // 横向き（副露の鳴いた牌）
   faceDown?: boolean; // 裏向き（暗槓の両端）
 }
@@ -83,9 +84,26 @@ function getTileImagePath(tile: TileType, horizontal: boolean): string {
   return `/tiles/pai-images/${filename}`;
 }
 
-export function Tile({ tile, size = 'medium', horizontal = false, faceDown = false }: TileProps): ReactElement {
-  const sizeConfig = horizontal ? HORIZONTAL_SIZES : SIZES;
-  const { width, height } = sizeConfig[size];
+export function Tile({ tile, size = 'medium', customSize, horizontal = false, faceDown = false }: TileProps): ReactElement {
+  // customSizeが指定されていればそれを使用、そうでなければプリセットサイズを使用
+  let width: number;
+  let height: number;
+
+  if (customSize) {
+    if (horizontal) {
+      // 横向きの場合は幅と高さを入れ替え
+      width = customSize.height;
+      height = customSize.width;
+    } else {
+      width = customSize.width;
+      height = customSize.height;
+    }
+  } else {
+    const sizeConfig = horizontal ? HORIZONTAL_SIZES : SIZES;
+    const preset = sizeConfig[size];
+    width = preset.width;
+    height = preset.height;
+  }
 
   const containerStyle: CSSProperties = {
     display: 'inline-block',
