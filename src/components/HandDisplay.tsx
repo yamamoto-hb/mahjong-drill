@@ -32,14 +32,15 @@ function useDynamicTileSize(params: TileSizeParams): { width: number; height: nu
       const viewportWidth = window.innerWidth;
 
       // レイアウトに応じた利用可能幅
-      // - PC版（601px以上）: 左カラム660px固定 → 640px使える
-      // - モバイル（600px以下）: viewportWidth - 16px
+      // - 1120px以上: 2カラム（左660px固定）
+      // - 601-1119px: 1カラム（左660px固定）
+      // - 600px以下: モバイル（全幅）
       let availableContainerWidth: number;
       if (viewportWidth <= 600) {
         // モバイル: 全幅からpadding引く
         availableContainerWidth = viewportWidth - 16;
       } else {
-        // PC版: 左カラム固定660pxなので約640px使える（右カラムの有無に関わらず）
+        // PC/タブレット: 左カラム固定660pxなので、手牌エリアは約640px使える
         availableContainerWidth = 640;
       }
 
