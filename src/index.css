@@ -98,38 +98,44 @@ button:active:not(:disabled) {
   opacity: 0.75;
 }
 
-/* メインコンテンツ - flexWrapで自然な折り返し */
-.main-content {
-  flex-wrap: wrap !important;
-}
-
-/* 左カラム - 固定幅、縮小不可 */
-.main-content > div:first-child {
-  flex: 0 0 660px !important;
-  width: 660px !important;
-  flex-shrink: 0 !important;
-}
-
 /* PC版: 上部のツモ/ロン牌を非表示 */
 .winning-tile-top {
   display: none !important;
 }
 
-/* 右カラムが折り返された後（660px+400px+gap=1100px未満）- 全幅に */
-@media (max-width: 1100px) {
-  .right-column {
-    flex: 1 0 100% !important;
-    width: 100% !important;
-    min-width: 100% !important;
+/* 1120px以上: 2カラム横並び */
+@media (min-width: 1120px) {
+  .main-content {
+    flex-wrap: nowrap !important;
   }
-  /* 折り返し後は役を2列に */
+  .main-content > div:first-child {
+    width: 660px !important;
+    min-width: 660px !important;
+    flex-shrink: 0 !important;
+  }
+  .right-column {
+    flex: 1 !important;
+    width: auto !important;
+    min-width: 400px !important;
+  }
   .yaku-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
-/* PC版2カラム時は役を3列に */
-@media (min-width: 1101px) {
+/* 601px〜1119px: 1カラム縦並び、左カラム固定幅維持 */
+@media (min-width: 601px) and (max-width: 1119px) {
+  .main-content {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .main-content > div:first-child {
+    width: 660px !important;
+    min-width: 660px !important;
+  }
+  .right-column {
+    width: 660px !important;
+  }
   .yaku-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
