@@ -99,7 +99,7 @@ button:active:not(:disabled) {
 }
 
 /* PC版で役一覧を3列に */
-@media (min-width: 1025px) {
+@media (min-width: 601px) {
   .yaku-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
@@ -118,8 +118,8 @@ button:active:not(:disabled) {
   display: none !important;
 }
 
-/* レスポンシブ対応 - タブレット以下で1カラム＋モバイルレイアウト適用 */
-@media (max-width: 1024px) {
+/* レスポンシブ対応 - 600px以下でモバイルレイアウト適用 */
+@media (max-width: 600px) {
   .main-content {
     flex-direction: column !important;
     padding: 8px !important;
