@@ -103,38 +103,23 @@ button:active:not(:disabled) {
   display: none !important;
 }
 
-/* 1120px以上: 2カラム横並び */
-@media (min-width: 1120px) {
+/* PC版（601px以上）: flexで自然な折り返し */
+@media (min-width: 601px) {
   .main-content {
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
   }
+  /* 左カラム: 660px固定、縮小不可 */
   .main-content > div:first-child {
+    flex: 0 0 660px !important;
     width: 660px !important;
     min-width: 660px !important;
     flex-shrink: 0 !important;
   }
+  /* 右カラム: 最小200px、縮小可能、スペースなければ折り返し */
   .right-column {
-    flex: 1 !important;
+    flex: 1 1 300px !important;
+    min-width: 200px !important;
     width: auto !important;
-    min-width: 400px !important;
-  }
-  .yaku-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-}
-
-/* 601px〜1119px: 1カラム縦並び、全幅使用 */
-@media (min-width: 601px) and (max-width: 1119px) {
-  .main-content {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-  .main-content > div:first-child {
-    width: 100% !important;
-    min-width: auto !important;
-  }
-  .right-column {
-    width: 100% !important;
   }
   .yaku-grid {
     grid-template-columns: repeat(3, 1fr) !important;
