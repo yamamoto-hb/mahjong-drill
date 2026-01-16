@@ -31,9 +31,9 @@ function useDynamicTileSize(params: TileSizeParams): { width: number; height: nu
 
       const viewportWidth = window.innerWidth;
 
-      // PC版（901px以上）では右カラムがあるので、左カラムの幅は限られる
+      // PC版（1025px以上）では右カラムがあるので、左カラムの幅は限られる
       // タブレット～モバイルでは全幅使える
-      const isPC = viewportWidth > 900;
+      const isPC = viewportWidth > 1024;
       const availableContainerWidth = isPC
         ? Math.min(viewportWidth - 480 - 48, 600) // 右カラム480px + gap + margin
         : viewportWidth - 16; // モバイルは左右padding 8px ずつ
