@@ -31,12 +31,18 @@ function useDynamicTileSize(params: TileSizeParams): { width: number; height: nu
 
       const viewportWidth = window.innerWidth;
 
-      // PC版（601px以上）では右カラムがあるので、左カラムの幅は限られる
-      // モバイル（600px以下）では全幅使える
-      const isPC = viewportWidth > 600;
-      const availableContainerWidth = isPC
-        ? Math.min(viewportWidth - 480 - 48, 600) // 右カラム480px + gap + margin
-        : viewportWidth - 16; // モバイルは左右padding 8px ずつ
+      // レイアウトに応じた利用可能幅
+      // - 1120px以上: 2カラム（左660px固定）
+      // - 601-1119px: 1カラム（左660px固定）
+      // - 600px以下: モバイル（全幅）
+      let availableContainerWidth: number;
+      if (viewportWidth <= 600) {
+        // モバイル: 全幅からpadding引く
+        availableContainerWidth = viewportWidth - 16;
+      } else {
+        // PC/タブレット: 左カラム固定660pxなので、手牌エリアは約640px使える
+        availableContainerWidth = 640;
+      }
 
       // コンテナのpadding（左右合計20px）
       const containerPadding = 20;
@@ -56,7 +62,7 @@ function useDynamicTileSize(params: TileSizeParams): { width: number; height: nu
 
       // サイズ制限
       const minWidth = 20;
-      const maxWidth = isPC ? 44 : 38;
+      const maxWidth = viewportWidth <= 600 ? 38 : 44;
 
       const tileWidth = Math.floor(Math.max(minWidth, Math.min(maxWidth, maxTileWidth)));
       const tileHeight = Math.floor(tileWidth / TILE_ASPECT_RATIO);
