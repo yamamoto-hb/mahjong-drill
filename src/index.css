@@ -1,0 +1,572 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Belle idée 風 洗練カラーパレット */
+  --color-bg: #F5F3EF;              /* 温かみのある背景 */
+  --color-bg-card: #FFFFFF;         /* 純白カード */
+  --color-bg-secondary: #F5F5F5;    /* 薄いグレー背景 */
+  --color-border: #E8E8E8;          /* 繊細なボーダー */
+  --color-border-light: #F0F0F0;    /* より薄いボーダー */
+  --color-text: #1A1A1A;            /* ほぼ黒のテキスト */
+  --color-text-secondary: #666666;  /* セカンダリテキスト */
+  --color-text-muted: #999999;      /* ミュートテキスト */
+
+  /* メインカラー（深緑 - 高級感） */
+  --color-primary: #1B4332;         /* ディープグリーン */
+  --color-primary-dark: #0D2818;    /* より深い緑 */
+  --color-primary-light: #2D6A4F;   /* 明るめグリーン */
+
+  /* アクセントカラー（ゴールド系 - 高級感） */
+  --color-accent: #B8860B;          /* ダークゴールド */
+  --color-accent-light: #D4A94C;    /* ライトゴールド */
+
+  /* フィードバックカラー */
+  --color-success: #2D6A4F;         /* サクセスグリーン */
+  --color-success-bg: #F0F7F4;      /* 薄緑背景 */
+  --color-warning: #B8860B;         /* ゴールド */
+  --color-warning-bg: #FDF8F0;      /* 薄いゴールド背景 */
+
+  font-family: "Noto Sans JP", "Yu Gothic UI", "Hiragino Sans", sans-serif;
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button {
+  font-family: inherit;
+  outline: none;
+}
+
+button:focus,
+button:active,
+div:focus,
+div:active {
+  outline: none;
+}
+
+select {
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* スクロールバーのスタイル */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-border-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D0D0D0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B0B0B0;
+}
+
+/* ボタン共通スタイル */
+button {
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+button:active:not(:disabled) {
+  opacity: 0.75;
+}
+
+/* PC版で役一覧を3列に */
+@media (min-width: 901px) {
+  .yaku-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* 右カラムの幅を固定 */
+.right-column {
+  width: 480px !important;
+  min-width: 480px !important;
+  max-width: 480px !important;
+  flex-shrink: 0 !important;
+}
+
+/* PC版: 上部のツモ/ロン牌を非表示 */
+.winning-tile-top {
+  display: none !important;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 900px) {
+  .main-content {
+    flex-direction: column !important;
+    padding: 8px !important;
+  }
+  .right-column {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+}
+
+/* モバイル対応 */
+@media (max-width: 480px) {
+  .main-content {
+    padding: 4px !important;
+    gap: 4px !important;
+  }
+
+  /* 手牌コンテナの幅を制限 */
+  .hand-container {
+    width: calc(100vw - 8px) !important;
+    max-width: calc(100vw - 8px) !important;
+    padding: 6px !important;
+  }
+
+  /* 手牌エリア */
+  .hand-area-scroll {
+    gap: 4px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  /* 縦向き牌のサイズ */
+  .hand-area-scroll .tile-vertical {
+    width: 20px !important;
+    height: 27px !important;
+  }
+  .hand-area-scroll .tile-vertical img {
+    width: 20px !important;
+    height: 27px !important;
+  }
+
+  /* 横向き牌（チー・ポンで鳴いた牌） */
+  .hand-area-scroll .tile-horizontal {
+    width: 27px !important;
+    height: 20px !important;
+  }
+  .hand-area-scroll .tile-horizontal img {
+    width: 27px !important;
+    height: 20px !important;
+  }
+
+  /* 牌グループの間隔 */
+  .hand-area-scroll > div {
+    gap: 1px !important;
+  }
+
+  /* 条件エリアも小さく */
+  .hand-container .condition-item {
+    padding: 2px 4px !important;
+    font-size: 9px !important;
+  }
+
+  /* ドラ牌も少し大きく */
+  .hand-container .dora-tiles .tile-vertical {
+    width: 20px !important;
+    height: 27px !important;
+  }
+  .hand-container .dora-tiles .tile-vertical img {
+    width: 20px !important;
+    height: 27px !important;
+  }
+
+  /* モバイル: 上部のツモ/ロン牌を表示 */
+  .winning-tile-top {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+  .winning-tile-top .tile-vertical {
+    width: 20px !important;
+    height: 27px !important;
+  }
+  .winning-tile-top .tile-vertical img {
+    width: 20px !important;
+    height: 27px !important;
+  }
+
+  /* モバイル: 下部（手牌エリア内）のツモ/ロン牌を非表示 */
+  .hand-area-scroll .winning-tile-area-mobile {
+    display: none !important;
+  }
+
+  /* 点数表のテーブル（セルサイズ固定） */
+  table {
+    table-layout: fixed !important;
+    width: 100% !important;
+  }
+  table th,
+  table td {
+    padding: 2px 1px !important;
+    font-size: 9px !important;
+  }
+
+  /* YakuStep: コンテナをコンパクトに */
+  .yaku-step-container {
+    padding: 6px !important;
+    margin-bottom: 4px !important;
+  }
+  .yaku-step-container h3 {
+    margin-bottom: 4px !important;
+    font-size: 10px !important;
+  }
+
+  /* YakuStep: 役一覧を3列に */
+  .yaku-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2px !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* YakuStep: 役アイテムをコンパクトに */
+  .yaku-grid > div {
+    padding: 3px 4px !important;
+    min-height: 20px !important;
+  }
+
+  /* YakuStep: 役名を小さく */
+  .yaku-grid .yaku-name {
+    font-size: 9px !important;
+  }
+
+  /* YakuStep: ヘルプボタン（?）を非表示 */
+  .yaku-help-button {
+    display: none !important;
+  }
+
+  /* YakuStep: 翻数を非表示（スペース節約） */
+  .yaku-han-text {
+    display: none !important;
+  }
+
+  /* YakuStep: 翻数調整ボタンを小さく */
+  .yaku-grid .han-adjuster {
+    gap: 1px !important;
+  }
+  .yaku-grid .han-adjuster button {
+    width: 14px !important;
+    height: 14px !important;
+    font-size: 9px !important;
+  }
+  .yaku-grid .han-adjuster span {
+    font-size: 9px !important;
+    min-width: 10px !important;
+  }
+
+  /* YakuStep: カテゴリタイトルをコンパクトに */
+  .yaku-category-title {
+    font-size: 9px !important;
+    margin-top: 4px !important;
+    margin-bottom: 2px !important;
+  }
+
+  /* YakuStep: ドラセクションをコンパクトに */
+  .dora-section {
+    padding: 4px 8px !important;
+    margin-bottom: 4px !important;
+  }
+  .dora-section .dora-label {
+    font-size: 10px !important;
+  }
+  .dora-section button {
+    width: 28px !important;
+    height: 24px !important;
+    font-size: 14px !important;
+  }
+  .dora-section .dora-value {
+    font-size: 12px !important;
+    min-width: 24px !important;
+  }
+
+  /* YakuStep: サマリーをコンパクトに */
+  .yaku-summary {
+    padding: 4px 8px !important;
+    margin-bottom: 6px !important;
+    font-size: 10px !important;
+  }
+  .yaku-summary .summary-total {
+    font-size: 13px !important;
+  }
+
+  /* YakuStep: 送信ボタンをコンパクトに */
+  .yaku-step-container button[type="submit"],
+  .yaku-step-container > button:last-child {
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+  }
+
+  /* FuStep: コンテナをコンパクトに */
+  .fu-step-container {
+    padding: 6px !important;
+    margin-bottom: 4px !important;
+  }
+  .fu-step-container h3 {
+    margin-bottom: 4px !important;
+    font-size: 10px !important;
+  }
+
+  /* FuStep: 面子行のレイアウト調整 */
+  .fu-mentsu-row {
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+    padding: 3px 6px !important;
+    margin-bottom: 2px !important;
+  }
+
+  /* FuStep: 縦向き牌のサイズ */
+  .fu-mentsu-row .fu-tiles .tile-vertical {
+    width: 18px !important;
+    height: 24px !important;
+  }
+  .fu-mentsu-row .fu-tiles .tile-vertical img {
+    width: 18px !important;
+    height: 24px !important;
+  }
+
+  /* FuStep: 横向き牌のサイズ */
+  .fu-mentsu-row .fu-tiles .tile-horizontal {
+    width: 24px !important;
+    height: 18px !important;
+  }
+  .fu-mentsu-row .fu-tiles .tile-horizontal img {
+    width: 24px !important;
+    height: 18px !important;
+  }
+  .fu-mentsu-row .fu-tiles {
+    margin-right: 2px !important;
+  }
+
+  /* FuStep: 面子情報を縮小 */
+  .fu-mentsu-row .fu-info {
+    font-size: 9px !important;
+    min-width: 32px !important;
+  }
+
+  /* FuStep: 符ボタンを2×3グリッドで右寄せ */
+  .fu-button-group {
+    display: grid !important;
+    grid-template-columns: repeat(3, 24px) !important;
+    grid-template-rows: repeat(2, auto) !important;
+    gap: 1px !important;
+    margin-left: auto !important;
+  }
+  .fu-button-group button {
+    padding: 2px 3px !important;
+    font-size: 9px !important;
+    min-width: 24px !important;
+  }
+
+  /* FuStep: 和了方法ボタンを小さく */
+  .fu-agari-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2px !important;
+    margin-left: auto !important;
+  }
+  .fu-agari-buttons button {
+    padding: 2px 4px !important;
+    font-size: 8px !important;
+    min-width: 50px !important;
+  }
+
+  /* FuStep: サマリーをコンパクトに */
+  .fu-summary {
+    padding: 4px 8px !important;
+    margin-top: 4px !important;
+    margin-bottom: 6px !important;
+  }
+  .fu-summary .summary-text {
+    font-size: 9px !important;
+  }
+  .fu-summary .summary-total {
+    font-size: 13px !important;
+  }
+
+  /* FuStep: 送信ボタンをコンパクトに */
+  .fu-step-container > button {
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+  }
+
+  /* ScoreStep: コンテナをコンパクトに */
+  .score-step-container {
+    padding: 6px !important;
+    margin-bottom: 4px !important;
+  }
+  .score-step-container h3 {
+    margin-bottom: 4px !important;
+    font-size: 10px !important;
+  }
+
+  /* ScoreStep: 入力グループをコンパクトに */
+  .score-input-group {
+    margin-bottom: 4px !important;
+    gap: 4px !important;
+  }
+  .score-input-group input {
+    padding: 5px 6px !important;
+    font-size: 11px !important;
+    width: 70px !important;
+  }
+  .score-input-group .unit {
+    font-size: 9px !important;
+  }
+
+  /* ScoreStep: 送信ボタンをコンパクトに */
+  .score-step-container > button {
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+  }
+
+  /* TutorialSection: コンパクトに */
+  .tutorial-container {
+    margin-bottom: 8px !important;
+  }
+  .tutorial-tab-list button {
+    padding: 8px 4px !important;
+    font-size: 10px !important;
+  }
+  .tutorial-content {
+    padding: 10px !important;
+    font-size: 10px !important;
+    line-height: 1.6 !important;
+  }
+  .tutorial-heading {
+    font-size: 11px !important;
+    margin-bottom: 8px !important;
+  }
+  .tutorial-list {
+    margin: 6px 0 !important;
+    padding-left: 14px !important;
+  }
+  .tutorial-list li {
+    margin-bottom: 6px !important;
+    font-size: 10px !important;
+  }
+  .tutorial-tile-example {
+    padding: 8px 10px !important;
+    margin-top: 6px !important;
+  }
+  .tutorial-tile-example-title {
+    font-size: 10px !important;
+    margin-bottom: 4px !important;
+  }
+  .tutorial-tiles-row {
+    margin-right: 8px !important;
+    margin-bottom: 4px !important;
+    gap: 1px !important;
+  }
+  .tutorial-tiles-label {
+    font-size: 9px !important;
+    margin-right: 4px !important;
+  }
+  .tutorial-important-box {
+    padding: 10px !important;
+    margin-top: 8px !important;
+    font-size: 10px !important;
+  }
+  .tutorial-sub-heading {
+    font-size: 10px !important;
+    margin: 12px 0 6px 0 !important;
+    padding-bottom: 4px !important;
+  }
+  .tutorial-example-box {
+    padding: 8px 10px !important;
+    margin-top: 6px !important;
+    font-size: 10px !important;
+  }
+  .tutorial-table {
+    font-size: 9px !important;
+    margin-top: 6px !important;
+  }
+  .tutorial-table th,
+  .tutorial-table td {
+    padding: 4px 2px !important;
+    font-size: 9px !important;
+  }
+  /* テーブル内の牌表示が折り返されないように */
+  .tutorial-table .tutorial-tiles-row {
+    flex-wrap: nowrap !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  /* テーブル内の牌サイズを小さく */
+  .tutorial-table .tile-vertical {
+    width: 14px !important;
+    height: 19px !important;
+  }
+  .tutorial-table .tile-vertical img {
+    width: 14px !important;
+    height: 19px !important;
+  }
+  .tutorial-table .tile-vertical .tile-face-down {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 2px !important;
+    border-width: 1px !important;
+  }
+  .tutorial-table .tile-horizontal {
+    width: 19px !important;
+    height: 14px !important;
+  }
+  .tutorial-table .tile-horizontal img {
+    width: 19px !important;
+    height: 14px !important;
+  }
+
+  /* ScoreTable: コンパクトに */
+  .score-table-container {
+    margin-bottom: 4px !important;
+  }
+  .score-table-container .header {
+    padding: 4px 6px !important;
+    font-size: 9px !important;
+  }
+  .score-table-container .content {
+    padding: 3px !important;
+  }
+  .score-table-container .tab-list button {
+    padding: 2px 1px !important;
+    font-size: 8px !important;
+  }
+  .score-table-container table {
+    table-layout: fixed !important;
+    width: 100% !important;
+    font-size: 8px !important;
+  }
+  .score-table-container th,
+  .score-table-container td {
+    padding: 2px 1px !important;
+    font-size: 8px !important;
+    height: 22px !important;
+    box-sizing: border-box !important;
+  }
+  .score-table-container .note {
+    font-size: 7px !important;
+    margin-top: 2px !important;
+  }
+
+}
