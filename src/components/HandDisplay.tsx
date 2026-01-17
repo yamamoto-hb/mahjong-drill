@@ -66,7 +66,7 @@ function useDynamicTileSize(params: TileSizeParams): { width: number; height: nu
 
       // サイズ制限
       const minWidth = 20;
-      const maxWidth = viewportWidth <= 600 ? 38 : 44;
+      const maxWidth = viewportWidth <= 600 ? 38 : 39;
 
       const tileWidth = Math.floor(Math.max(minWidth, Math.min(maxWidth, maxTileWidth)));
       const tileHeight = Math.floor(tileWidth / TILE_ASPECT_RATIO);
