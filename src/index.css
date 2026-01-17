@@ -123,8 +123,8 @@ button:active:not(:disabled) {
   }
 }
 
-/* 601px〜1119px: 1カラム縦並び、左カラム固定幅維持 */
-@media (min-width: 601px) and (max-width: 1119px) {
+/* 701px〜1119px: 1カラム縦並び、左カラム固定幅維持 */
+@media (min-width: 701px) and (max-width: 1119px) {
   .main-content {
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -138,6 +138,24 @@ button:active:not(:disabled) {
   }
   .yaku-grid {
     grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* 601px〜700px: 1カラム、全幅使用 */
+@media (min-width: 601px) and (max-width: 700px) {
+  .main-content {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .main-content > div:first-child {
+    width: 100% !important;
+    min-width: auto !important;
+  }
+  .right-column {
+    width: 100% !important;
+  }
+  .yaku-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
